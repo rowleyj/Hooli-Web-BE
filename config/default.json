@@ -28,5 +28,5 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb://localhost:27017/hooli_web_be"
+  "mongodb": "mongodb+srv://hooli:rowleyhibbs@hooli.bhcss.mongodb.net/hoolidev?retryWrites=true&w=majority"
 }

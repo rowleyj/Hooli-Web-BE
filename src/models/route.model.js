@@ -1,21 +1,18 @@
-// users-model.js - A mongoose model
-//
+const { ObjectId } = mongoose.Schema.Types;
+
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
-	const modelName = 'users';
+	const modelName = 'route';
 	const mongooseClient = app.get('mongooseClient');
 	const schema = new mongooseClient.Schema({
-		email: { type: String, unique: true, lowercase: true },
-		password: { type: String },
-		name: {
-			type: String
+		userId: {
+			type: ObjectId,
+			required: true
 		},
-		height: {
-			type: Number
-		},
-		weight: {
-			type: Number
+		// to conver gpx to geojson look here: https://www.npmjs.com/package/@tmcw/togeojson
+		geo: {
+			type: Object, index: '2dsphere'
 		}
 	}, {
 		timestamps: true

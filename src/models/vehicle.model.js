@@ -1,22 +1,10 @@
-// users-model.js - A mongoose model
-//
-// See http://mongoosejs.com/docs/models.html
-// for more of what you can do here.
 module.exports = function (app) {
-	const modelName = 'users';
+	const modelName = 'vehicles';
 	const mongooseClient = app.get('mongooseClient');
 	const schema = new mongooseClient.Schema({
-		email: { type: String, unique: true, lowercase: true },
-		password: { type: String },
-		name: {
-			type: String
-		},
-		height: {
-			type: Number
-		},
-		weight: {
-			type: Number
-		}
+		licensePlate: { type: String },
+		closePasses: { type: Number, default: 0 },
+		// we could compute where repeat offenders generally pass (i.e. always on their street?)
 	}, {
 		timestamps: true
 	});

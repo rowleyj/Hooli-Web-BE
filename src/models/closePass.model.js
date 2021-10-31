@@ -1,20 +1,46 @@
-// users-model.js - A mongoose model
-//
+const { ObjectId } = mongoose.Schema.Types;
+
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
-	const modelName = 'users';
+	const modelName = 'closePass';
 	const mongooseClient = app.get('mongooseClient');
 	const schema = new mongooseClient.Schema({
-		email: { type: String, unique: true, lowercase: true },
-		password: { type: String },
-		name: {
-			type: String
+		userId: {
+			type: ObjectId,
+			required: true
 		},
-		height: {
-			type: Number
+		videoId: {
+			type: ObjectId,
+			required: true
 		},
-		weight: {
+		vehicleId: {
+			type: ObjectId,
+			required: true
+		},
+		passingDistance: {
+			type: Number,
+			required: true
+		},
+		confidence: {
+			type: Number,
+			required: true
+		},
+		passingSpeed: {
+			type: Number,
+		},
+		geo: {
+			type: {
+				type: String,
+				enum: ['Point'],
+				required: true
+			},
+			coords: {
+				type: [Number],
+				required: true
+			}
+		},
+		timeOfPass: {
 			type: Number
 		}
 	}, {
