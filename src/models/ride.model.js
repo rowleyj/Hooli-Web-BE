@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
 // See http://mongoosejs.com/docs/models.html
