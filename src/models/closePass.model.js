@@ -10,13 +10,12 @@ module.exports = function (app) {
 			type: ObjectId,
 			required: true
 		},
-		videoId: {
-			type: ObjectId,
-			required: true
-		},
 		vehicleId: {
 			type: ObjectId,
 			required: true
+		},
+		videoUrl: {
+			type: String
 		},
 		passingDistance: {
 			type: Number,

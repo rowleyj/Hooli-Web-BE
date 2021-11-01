@@ -23,8 +23,8 @@ module.exports = function (app) {
 			type: ObjectId,
 			required: false
 		},
-		videoId: {
-			type: ObjectId
+		videoUrl: {
+			type: String
 		}
 	}, {
 		timestamps: true
