@@ -26,7 +26,7 @@ const app = express(feathers());
 app.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet({
-  contentSecurityPolicy: false
+	contentSecurityPolicy: false
 }));
 app.use(cors());
 app.use(compress());
@@ -35,13 +35,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(app.get('public')));
+app.use((req, res, next) => {
+	logger.log('info', `Request inbound ${req.method}: ${req.path} from ${req.hostname}`);
+	next();
+});
 
 // Set up Plugins and providers
 app.configure(express.rest());
 app.configure(socketio());
 
 // console.log(app);
-app.configure(mongoose); 
+app.configure(mongoose);
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
 app.configure(authentication);
