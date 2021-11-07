@@ -7,7 +7,7 @@
     "max": 50
   },
   "authentication": {
-    "entity": "user",
+    "entity": "users",
     "service": "users",
     "secret": "cqCAVjUgtPNVPvzAuQygqEVFIps=",
     "authStrategies": [
@@ -25,7 +25,8 @@
     },
     "local": {
       "usernameField": "email",
-      "passwordField": "password"
+      "passwordField": "password",
+	  "errorMessage": "Invalid Login"
     }
   },
   "mongodb": "mongodb+srv://hooli:rowleyhibbs@hooli.bhcss.mongodb.net/hoolidev?retryWrites=true&w=majority"

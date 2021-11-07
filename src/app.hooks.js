@@ -22,7 +22,7 @@ module.exports = {
 	},
 
 	error: {
-		all: [(e) => console.log('error occured', e)],
+		// all: [(e) => console.log('error occured', e)],
 		find: [],
 		get: [],
 		create: [],
