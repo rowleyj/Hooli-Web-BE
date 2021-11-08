@@ -14,6 +14,9 @@ module.exports = function (app) {
 		title: {
 			type: String
 		},
+		description: {
+			type: String
+		},
 		distance: {
 			type: Number
 		},

@@ -8,7 +8,7 @@ const vehicle = require('./vehicle/vehicle.service.js');
 module.exports = function (app) {
 	//   app.configure(closePass);
 	//   app.configure(ride);
-	//   app.configure(route);
+	app.configure(route);
 	app.configure(users);
 	//   app.configure(vehicle);
 };
