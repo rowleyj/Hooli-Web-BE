@@ -1,7 +1,7 @@
 const { Service } = require('feathers-mongoose');
 
 exports.Route = class Route extends Service {
-	async find (params) { }
+	// async find (params) { }
 	async get (id, params) { }
 	/**
 	 * 
@@ -23,6 +23,7 @@ exports.Route = class Route extends Service {
 		return super.create(route, params);
 	}
 	async update (id, data, params) { }
-	async patch (id, data, params) { }
+	async patch (id, data, params) {
+	}
 	async remove (id, params) { }
 };
