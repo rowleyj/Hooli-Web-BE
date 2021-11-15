@@ -16,7 +16,15 @@ module.exports = {
 		all: [],
 		find: [],
 		get: [],
-		create: [],
+		create: [
+			(ctx) => {
+				console.log('there is the context', ctx);
+				// try to put request to process video on FLASK here
+				// do not wait for response - POST /closepass endpoint will be called
+				// PASS AUTH TOKEN TO FLASK AND BACK, or userid
+				// axios.post()
+			}
+		],
 		update: [],
 		patch: [],
 		remove: []
