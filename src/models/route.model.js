@@ -14,7 +14,7 @@ module.exports = function (app) {
 		// only custom routes will have names
 		name: {
 			type: String,
-			required: true
+			required: false
 		},
 		// to conver gpx to geojson look here: https://www.npmjs.com/package/@tmcw/togeojson
 		geo: {

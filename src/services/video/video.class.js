@@ -20,7 +20,8 @@ exports.Video = class Video extends Service {
 		destination = destination.substring(9, destination.length);	//trim the ./public/ off the front
 		const video = {
 			url: `http://localhost:8080/${destination}${filename}`,
-			title: data.title
+			title: data.title,
+			userId: params.users._id
 		}
 		return super.create(video, params);
 

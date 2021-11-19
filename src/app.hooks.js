@@ -5,7 +5,7 @@ module.exports = {
 		all: [],
 		find: [],
 		get: [],
-		create: [() => console.log(';creating')],
+		create: [() => console.log('creating')],
 		update: [],
 		patch: [],
 		remove: []

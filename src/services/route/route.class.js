@@ -11,13 +11,14 @@ exports.Route = class Route extends Service {
 	 */
 	async create (data, params) {
 		// package into mongo linestring: https://geojson.org/geojson-spec.html#linestring
+		console.log('creating route', params);
 		const route = {
 			geo: {
 				type: 'LineString',
 				coordinates: data.coords,
 			},
 			name: data.name,
-			userId: params.users._id
+			userId: params.users._id,
 		}
 		console.log(route);
 		return super.create(route, params);

@@ -23,5 +23,15 @@ module.exports = function (app) {
 		console.log(req.file);
 		req.feathers.file = req.file;
 		next();
-	})
+	});
+
+	/**
+	 * Middleware to upload gpx file for ride endpoint
+	 */
+	// app.post('/ride', multipartMiddleware.single('ride'), (req, res, next) => {
+	// 	console.log('at ride middleware');
+	// 	console.log(req.file);
+	// 	req.feathers.file = req.file;
+	// 	next();
+	// })
 };
