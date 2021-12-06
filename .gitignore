@@ -107,7 +107,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # Others
-lib/
 data/
 config/default.json
 
