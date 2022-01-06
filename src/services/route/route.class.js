@@ -26,5 +26,7 @@ exports.Route = class Route extends Service {
 	async update (id, data, params) { }
 	async patch (id, data, params) {
 	}
-	async remove (id, params) { }
+	async remove (id, params) {
+		return super.remove(id, params);
+	 }
 };
