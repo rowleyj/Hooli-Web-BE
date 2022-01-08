@@ -1,4 +1,5 @@
 const { Service } = require('feathers-mongoose');
+const RideStats = require('../../lib/RideStats');
 
 exports.Ride = class Ride extends Service {
 	constructor(options, app) {
@@ -15,10 +16,18 @@ exports.Ride = class Ride extends Service {
 			params
 		)
 
+		// get stats
+		let weight = 100; // temp
+		let gpsRefreshDelayMs = 500; // temp
+		const stats = new RideStats(data.geoJSON, weight, gpsRefreshDelayMs)
+
 		const ride = {
 			routeId: route._id,
 			title: data.title,
-			userId: params.users._id
+			userId: params.users._id,
+			stats: {
+				...stats.summary
+			}
 		}
 		return super.create(ride, params);
 	}

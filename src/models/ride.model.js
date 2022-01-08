@@ -29,6 +29,15 @@ module.exports = function (app) {
 		},
 		videoUrl: {
 			type: String
+		},
+		stats: {
+			caloriesBurned: Number,
+			distance: Number,
+			speeds: [Number],
+			avgSpeed: Number,
+			// totalClossPasses: Number, found via query
+			elapsedTimeMs: Number,
+			movementTimeMs: Number
 		}
 	}, {
 		timestamps: true
