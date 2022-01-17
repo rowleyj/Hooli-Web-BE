@@ -28,10 +28,9 @@ module.exports = function (app) {
 	/**
 	 * Middleware to upload gpx file for ride endpoint
 	 */
-	// app.post('/ride', multipartMiddleware.single('ride'), (req, res, next) => {
-	// 	console.log('at ride middleware');
-	// 	console.log(req.file);
-	// 	req.feathers.file = req.file;
-	// 	next();
-	// })
+	app.post('/ride', multipartMiddleware.single('ride'), (req,res, next) => {
+		req.feathers.file = req.file;
+		
+		next();
+	})
 };
