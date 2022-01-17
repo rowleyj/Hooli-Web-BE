@@ -18,9 +18,6 @@ module.exports = function (app) {
 		description: {
 			type: String
 		},
-		distance: {
-			type: Number
-		},
 		fileURL: {
 			type: String
 		},

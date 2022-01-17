@@ -17,7 +17,6 @@ module.exports = function (app) {
 			type: String,
 			required: false
 		},
-		// to conver gpx to geojson look here: https://www.npmjs.com/package/@tmcw/togeojson
 		geo: {
 			type: Object, index: '2dsphere'
 		}

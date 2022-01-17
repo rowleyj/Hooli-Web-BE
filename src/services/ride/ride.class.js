@@ -1,5 +1,5 @@
 const { Service } = require('feathers-mongoose');
-const RideStats = require('../../lib/RideStats');
+const { RideStats } = require('../../lib/RideStats');
 
 exports.Ride = class Ride extends Service {
 	constructor(options, app) {
@@ -12,16 +12,32 @@ exports.Ride = class Ride extends Service {
 	async get (id, params) { }
 
 	async create (data, params) {
+		// with file parse need to pull out data
+		// need data.coords from file
+		// need closepass timings, passingDistance (from sensor arrays), and coords(from gps array based on timing)
+
 		// create route
 		const route = await this.app.service('route').create(
-			{ coords: data.geoJSON, name: data.title },
+			{ coords: data.coords, name: data.title },
 			params
 		);
+
+		// create closePasses
+		const closePasses = await Promise.all(data.closePasses.map(async(closePass) => this.app.service('closePass').create(
+			{
+				passingDistance: closePass.passingDistance,
+				timeOfPass: closePass.timing,
+				geo: {
+					type: 'Point',
+					coords: closePass.coords
+				}
+			}
+		)));
 
 		// get stats
 		const weight = 100; // temp
 		const gpsRefreshDelayMs = 500; // temp
-		const stats = new RideStats(data.geoJSON, weight, gpsRefreshDelayMs);
+		const stats = new RideStats(data.coords, weight, gpsRefreshDelayMs);
 
 		const ride = {
 			routeId: route._id,

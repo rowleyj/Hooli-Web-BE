@@ -49,4 +49,8 @@ function gpsCoordsToDistance (coordArray) {
 	return distance;
 }
 
-module.exports.gpsCoordsToDistance = gpsCoordsToDistance;
+module.exports = {
+	gpsCoordsToDistance,
+	getDistancesBetweenPoints,
+	getDistanceBetweenPoints
+};

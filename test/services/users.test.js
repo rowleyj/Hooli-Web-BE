@@ -1,21 +1,23 @@
-const assert = require('assert');
 const { expect } = require('chai');
 const { Chance } = require('chance');
 const app = require('../../src/app');
 
 const chance = new Chance();
+const testUser = {
+	email: chance.email(),
+	password: chance.string()
+};
 
 describe('\'users\' service', () => {
-	const testUser = {
-		email: chance.email(),
-		password: chance.string()
-	};
 	let user;
+
+	after(async() => {
+		if (user) await app.service('users').remove(user._id);
+	});
 
 	it('registered the service', () => {
 		const service = app.service('users');
-
-		assert.ok(service, 'Registered the service');
+		expect(service).to.exist;
 	});
 
 	it('creates a user, encrypts password and adds gravatar', async () => {
@@ -34,7 +36,7 @@ describe('\'users\' service', () => {
 	it('should find a user - GET w/query', async() => {
 		const [userRetrieved] = await app.service('users').find({
 			query: {
-				email: user.email
+				email: testUser.email
 			}
 		});
 		expect(userRetrieved.email).to.equal(testUser.email);
@@ -46,9 +48,5 @@ describe('\'users\' service', () => {
 		expect(userUpdated.weight).to.equal(update.weight);
 		// updating a user should still encrpyt password
 		expect(userUpdated.password).to.not.equal(testUser.password);
-	});
-
-	after(async() => {
-		if (user) await app.service('users').remove(user._id);
 	});
 });

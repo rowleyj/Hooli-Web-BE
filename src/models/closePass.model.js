@@ -14,7 +14,6 @@ module.exports = function (app) {
 		},
 		vehicleId: {
 			type: ObjectId,
-			required: true
 		},
 		videoUrl: {
 			type: String

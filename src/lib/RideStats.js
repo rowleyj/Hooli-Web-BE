@@ -12,9 +12,9 @@ class RideStats {
 		const distance = this.getDistance();
 		return {
 			speeds,
-			avgSpeed: speeds.reduce((sum, speed) => sum += speed, 0) / speed.length,
+			avgSpeed: speeds.reduce((sum, speed) => sum + speed, 0) / speeds.length,
 			distance,
-			movementTimeMs: this.getMovementTime(speed, 5),
+			movementTimeMs: this.getMovementTime(speeds, 5),
 			elapsedTime: this.gpsCoords.length * this.gpsRefreshDelayMs,
 			caloriesBurned: this.getCaloriesBurned(distance)
 		};
