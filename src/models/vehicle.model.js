@@ -15,5 +15,4 @@ module.exports = function (app) {
 		mongooseClient.deleteModel(modelName);
 	}
 	return mongooseClient.model(modelName, schema);
-
 };

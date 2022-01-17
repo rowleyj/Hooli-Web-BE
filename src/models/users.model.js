@@ -4,8 +4,10 @@ module.exports = function (app) {
 	const modelName = 'users';
 	const mongooseClient = app.get('mongooseClient');
 	const schema = new mongooseClient.Schema({
-		email: { type: String, unique: true, lowercase: true },
-		password: { type: String },
+		email: {
+			type: String, unique: true, lowercase: true, required: true
+		},
+		password: { type: String, required: true },
 		name: {
 			type: String
 		},
@@ -25,5 +27,4 @@ module.exports = function (app) {
 		mongooseClient.deleteModel(modelName);
 	}
 	return mongooseClient.model(modelName, schema);
-
 };

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { ObjectId } = mongoose.Schema.Types;
 
 // See http://mongoosejs.com/docs/models.html
@@ -53,5 +54,4 @@ module.exports = function (app) {
 		mongooseClient.deleteModel(modelName);
 	}
 	return mongooseClient.model(modelName, schema);
-
 };
