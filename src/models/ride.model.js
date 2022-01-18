@@ -12,6 +12,7 @@ module.exports = function (app) {
 			type: ObjectId,
 			required: true
 		},
+		closePasses: [ObjectId],
 		title: {
 			type: String
 		},

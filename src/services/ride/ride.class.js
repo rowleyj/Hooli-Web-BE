@@ -12,10 +12,6 @@ exports.Ride = class Ride extends Service {
 	async get (id, params) { }
 
 	async create (data, params) {
-		// with file parse need to pull out data
-		// need data.coords from file
-		// need closepass timings, passingDistance (from sensor arrays), and coords(from gps array based on timing)
-
 		// create route
 		const route = await this.app.service('route').create(
 			{ coords: data.coords, name: data.title },
@@ -33,6 +29,7 @@ exports.Ride = class Ride extends Service {
 				}
 			}
 		)));
+		const closePassIds = closePasses.map(closePass => closePass._id);
 
 		// get stats
 		const weight = 100; // temp
@@ -45,7 +42,8 @@ exports.Ride = class Ride extends Service {
 			userId: params.users._id,
 			stats: {
 				...stats.summary
-			}
+			},
+			closePasses: closePassIds
 		};
 		return super.create(ride, params);
 	}
