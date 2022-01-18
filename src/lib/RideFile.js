@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} ClosePass
- * @property {number} passingDistance - distance of passing
+ * @property {number[]} passingDistances - distance of passing
  * @property {number} timeOfPass - time of closepass from laser sensor
  * @property {number[][]} coords - longitude, latitude pair
  */
@@ -8,17 +8,17 @@
 class RideFile {
 	/**
 	 * Parses .json file and exposes methods to compute required information
-	 * @param {File} file 
+	 * @param {File} file
 	 */
 	constructor(file) {
 		this.data = JSON.parse(file);
 	}
 
-	get distanceSensorDelay(){
+	get distanceSensorDelay() {
 		return this.distance.delay;
 	}
 
-	get gpsSensorDelay(){
+	get gpsSensorDelay() {
 		return this.gps.delay;
 	}
 
@@ -37,23 +37,23 @@ class RideFile {
 	 * @param {number} time - timing of closepass from laser sensor
 	 * @returns {ClosePass}
 	 */
-	getClosePass(time){
+	getClosePass(time) {
 		return {
 			timeOfPass: time,
 			coords: this.getClosePassCoords(time),
 			passingDistance: this.getPassingDistance(time)
-		}
+		};
 	}
 
 	/**
 	 * Finds the corresponding coordinates for a closepass time
-	 * @param {number} time 
+	 * @param {number} time
 	 * @returns {number[][]} longitude, latitude pair
 	 */
 	getClosePassCoords(time) {
 		const { delay: gpsDelay, coords } = this.data.gps;
 
-		let i = this.timeToIndex(gpsDelay, time)
+		const i = this.timeToIndex(gpsDelay, time);
 
 		if (i === coords.length) throw Error('Timing mismatch, cannot provide coordinates for close pass');
 
@@ -64,39 +64,39 @@ class RideFile {
 	}
 
 	getPassingDistance(time) {
-		let {sensor1, sensor2, sensor3} = this.data.distance;
-		let idx = this.timeToIndex(this.distanceSensorDelay, time);
+		const { sensor1, sensor2, sensor3 } = this.data.distance;
+		const idx = this.timeToIndex(this.distanceSensorDelay, time);
 
 		// if(i === sensor1.length || i === sensor2.length || i === sensor)
-		let distances = [ this.packageSensorDistance(sensor1[idx], 1), this.packageSensorDistance(sensor2[idx], 2), this.packageSensorDistance(sensor3[idx], 3)];
+		const distances = [this.packageSensorDistance(sensor1[idx], 1), this.packageSensorDistance(sensor2[idx], 2), this.packageSensorDistance(sensor3[idx], 3)];
 
-		// assume the smallest distance is the passing distance
-		distances.sort((a,b) => a.distance - b.distance);
-		return distances[0];
+		return distances;
 	}
 
 	/**
 	 * Packages sensor distance with sensor number to maintian data for potential directional computation
-	 * @param {number} distance 
-	 * @param {number} sensorNumber 
+	 * @param {number} distance
+	 * @param {number} sensorNumber
 	 * @returns {object}
 	 */
-	packageSensorDistance(distance, sensorNumber){
+	// eslint-disable-next-line class-methods-use-this
+	packageSensorDistance(distance, sensorNumber) {
 		return {
 			distance, sensor: sensorNumber
-		}
+		};
 	}
 
 	/**
 	 * Finds the matching index or index directly after the given time for sensor arrays with different delay timings
-	 * @param {number} delayTime 
-	 * @param {number} timeOfEvent 
+	 * @param {number} delayTime
+	 * @param {number} timeOfEvent
 	 * @returns {number} - index
 	 */
-	timeToIndex(delayTime, timeOfEvent){
-		if (delayTime <= 0) throw Error('GPS delay malformed, should be above 0');
+	// eslint-disable-next-line class-methods-use-this
+	timeToIndex(delayTime, timeOfEvent) {
+		if (delayTime <= 0) throw Error('Delay malformed, should be above 0');
 
-		return Math.ceil(timeOfEvent/delayTime);
+		return Math.ceil(timeOfEvent / delayTime);
 	}
 }
 
