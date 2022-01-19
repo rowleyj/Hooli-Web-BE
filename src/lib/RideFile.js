@@ -15,11 +15,11 @@ class RideFile {
 	}
 
 	get distanceSensorDelay() {
-		return this.distance.delay;
+		return this.data.distance.delay;
 	}
 
 	get gpsSensorDelay() {
-		return this.gps.delay;
+		return this.data.gps.delay;
 	}
 
 	/**
@@ -54,36 +54,33 @@ class RideFile {
 		const { delay: gpsDelay, coords } = this.data.gps;
 
 		const i = this.timeToIndex(gpsDelay, time);
+		const index = Math.floor(i);
+		if (index === coords.length) throw Error('Timing mismatch, cannot provide coordinates for close pass');
 
-		if (i === coords.length) throw Error('Timing mismatch, cannot provide coordinates for close pass');
+		// if delay was exactly on index then return index
+		if (index === i) { return coords[index]; }
 
-		const prevCoord = coords[i - 1];
-		const coord = coords[i];
+		const prevWeight = Math.abs(i - index);
+		const currWeight = 1 - prevWeight;
+		const prevCoord = coords[index - 1];
+		const coord = coords[index];
 		// take the average of the coordinate after and before
-		return [(coord[0] + prevCoord[0]) / 2, (coord[1] + prevCoord[1]) / 2];
-	}
-
-	getPassingDistance(time) {
-		const { sensor1, sensor2, sensor3 } = this.data.distance;
-		const idx = this.timeToIndex(this.distanceSensorDelay, time);
-
-		// if(i === sensor1.length || i === sensor2.length || i === sensor)
-		const distances = [this.packageSensorDistance(sensor1[idx], 1), this.packageSensorDistance(sensor2[idx], 2), this.packageSensorDistance(sensor3[idx], 3)];
-
-		return distances;
+		return [(currWeight * coord[0] + prevWeight * prevCoord[0]) / 2, (currWeight * coord[1] + prevWeight * prevCoord[1]) / 2];
 	}
 
 	/**
-	 * Packages sensor distance with sensor number to maintian data for potential directional computation
-	 * @param {number} distance
-	 * @param {number} sensorNumber
-	 * @returns {object}
+	 * Returns the list of distances at the time of a closepass
+	 * Note that the distances will always be exactly on an index
+	 * @param {number} time
+	 * @returns {number[]}
 	 */
-	// eslint-disable-next-line class-methods-use-this
-	packageSensorDistance(distance, sensorNumber) {
-		return {
-			distance, sensor: sensorNumber
-		};
+	getPassingDistance(time) {
+		const { sensor1, sensor2, sensor3 } = this.data.distance;
+		const idx = Math.floor(this.timeToIndex(this.distanceSensorDelay, time));
+
+		const distances = [sensor1[idx], sensor2[idx], sensor3[idx]];
+
+		return distances;
 	}
 
 	/**
@@ -96,7 +93,7 @@ class RideFile {
 	timeToIndex(delayTime, timeOfEvent) {
 		if (delayTime <= 0) throw Error('Delay malformed, should be above 0');
 
-		return Math.ceil(timeOfEvent / delayTime);
+		return timeOfEvent / delayTime;
 	}
 }
 

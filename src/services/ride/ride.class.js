@@ -12,14 +12,16 @@ exports.Ride = class Ride extends Service {
 	async get (id, params) { }
 
 	async create (data, params) {
+		const { gps, closePasses, times } = params;
+
 		// create route
 		const route = await this.app.service('route').create(
-			{ coords: data.coords, name: data.title },
+			{ coords: gps.coords, name: data.title },
 			params
 		);
 
 		// create closePasses
-		const closePasses = await Promise.all(data.closePasses.map(async(closePass) => this.app.service('closePass').create(
+		const createdClosePasses = await Promise.all(closePasses.map(async(closePass) => this.app.service('closePass').create(
 			{
 				passingDistance: closePass.passingDistance,
 				timeOfPass: closePass.timing,
@@ -29,12 +31,11 @@ exports.Ride = class Ride extends Service {
 				}
 			}
 		)));
-		const closePassIds = closePasses.map(closePass => closePass._id);
+		const closePassIds = createdClosePasses.map(closePass => closePass._id);
 
 		// get stats
 		const weight = 100; // temp
-		const gpsRefreshDelayMs = 500; // temp
-		const stats = new RideStats(data.coords, weight, gpsRefreshDelayMs);
+		const stats = new RideStats(data.coords, weight, gps.delay);
 
 		const ride = {
 			routeId: route._id,
@@ -43,7 +44,9 @@ exports.Ride = class Ride extends Service {
 			stats: {
 				...stats.summary
 			},
-			closePasses: closePassIds
+			closePasses: closePassIds,
+			startTime: times.start,
+			endTime: times.end
 		};
 		return super.create(ride, params);
 	}

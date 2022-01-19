@@ -1,4 +1,5 @@
 const multer = require('multer');
+const { RideFile } = require('../lib/RideFile');
 
 const storage = multer.diskStorage({
 	destination: './public/uploads/',
@@ -29,12 +30,18 @@ module.exports = function (app) {
 	 * Middleware to upload gpx file for ride endpoint
 	 */
 	app.post('/ride', multipartMiddleware.single('ride'), (req, res, next) => {
-		req.feathers.file = req.file;
+		// req.feathers.file = req.file;
 
 		// with file parse need to pull out data
 		// need data.coords from file
 		// need closepass timings, passingDistance (from sensor arrays), and coords(from gps array based on timing)
-
+		const rideFile = new RideFile(req.file);
+		req.feathers.closePasses = rideFile.computeClosePasses();
+		req.feathers.gps = rideFile.gps;
+		req.feathers.times = {
+			start: rideFile.start,
+			end: rideFile.end
+		};
 		next();
 	});
 };

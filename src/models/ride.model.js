@@ -29,6 +29,8 @@ module.exports = function (app) {
 		videoUrl: {
 			type: String
 		},
+		startTime: Number,
+		endTime: Number,
 		stats: {
 			caloriesBurned: Number,
 			distance: Number,
