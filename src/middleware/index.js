@@ -37,10 +37,10 @@ module.exports = function (app) {
 		// need closepass timings, passingDistance (from sensor arrays), and coords(from gps array based on timing)
 		const rideFile = new RideFile(req.file);
 		req.feathers.closePasses = rideFile.computeClosePasses();
-		req.feathers.gps = rideFile.gps;
+		req.feathers.gps = rideFile.data.gps;
 		req.feathers.times = {
-			start: rideFile.start,
-			end: rideFile.end
+			start: rideFile.data.start,
+			end: rideFile.data.end
 		};
 		next();
 	});

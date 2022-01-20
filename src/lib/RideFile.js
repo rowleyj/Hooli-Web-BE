@@ -41,7 +41,7 @@ class RideFile {
 		return {
 			timeOfPass: time,
 			coords: this.getClosePassCoords(time),
-			passingDistance: this.getPassingDistance(time)
+			passingDistances: this.getPassingDistances(time)
 		};
 	}
 
@@ -74,7 +74,7 @@ class RideFile {
 	 * @param {number} time
 	 * @returns {number[]}
 	 */
-	getPassingDistance(time) {
+	getPassingDistances(time) {
 		const { sensor1, sensor2, sensor3 } = this.data.distance;
 		const idx = Math.floor(this.timeToIndex(this.distanceSensorDelay, time));
 

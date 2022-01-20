@@ -21,21 +21,26 @@ exports.Ride = class Ride extends Service {
 		);
 
 		// create closePasses
-		const createdClosePasses = await Promise.all(closePasses.map(async(closePass) => this.app.service('closePass').create(
+		// console.log(closePasses);
+		const closePassCreationPromises = closePasses.map(async(closePass) => this.app.service('closePass').create(
 			{
-				passingDistance: closePass.passingDistance,
-				timeOfPass: closePass.timing,
+				passingDistances: closePass.passingDistances,
+				timeOfPass: closePass.timeOfPass,
 				geo: {
 					type: 'Point',
 					coords: closePass.coords
 				}
+			},
+			{
+				users: params.users
 			}
-		)));
+		));
+		const createdClosePasses = await Promise.all(closePassCreationPromises);
 		const closePassIds = createdClosePasses.map(closePass => closePass._id);
 
 		// get stats
 		const weight = 100; // temp
-		const stats = new RideStats(data.coords, weight, gps.delay);
+		const stats = new RideStats(gps.coords, weight, gps.delay);
 
 		const ride = {
 			routeId: route._id,

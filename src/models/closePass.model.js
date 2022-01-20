@@ -18,13 +18,12 @@ module.exports = function (app) {
 		videoUrl: {
 			type: String
 		},
-		passingDistance: {
-			type: Number,
+		passingDistances: {
+			type: [Number],
 			required: true
 		},
 		confidence: {
 			type: Number,
-			required: true
 		},
 		passingSpeed: {
 			type: Number,

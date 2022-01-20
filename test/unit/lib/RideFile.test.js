@@ -39,10 +39,10 @@ describe('RideFile class', () => {
 		it('should compute close passes', () => {
 			const closePasses = rideFile.computeClosePasses();
 			expect(closePasses).to.have.length(2);
-			closePasses.forEach(({ timeOfPass, coords, passingDistance }) => {
+			closePasses.forEach(({ timeOfPass, coords, passingDistances }) => {
 				// at least one of the sensors should have sensed distance less than 1m
-				passingDistance.sort((a, b) => a - b);
-				expect(passingDistance[0]).to.be.lessThan(1);
+				passingDistances.sort((a, b) => a - b);
+				expect(passingDistances[0]).to.be.lessThan(1);
 
 				expect(timeOfPass).to.be.greaterThan(0);
 				expect(coords).to.have.length(2);
