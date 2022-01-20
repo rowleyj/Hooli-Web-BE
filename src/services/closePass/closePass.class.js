@@ -11,8 +11,6 @@ exports.ClosePass = class ClosePass extends Service {
 	 * @param {*} params
 	 */
 	async create (data, params) {
-		console.log('at create closepass');
-		console.log(data, params);
 		const closePass = {
 			...data,
 			userId: params.users._id

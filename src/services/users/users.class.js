@@ -20,7 +20,7 @@ exports.Users = class Users extends Service {
 		return user;
 	}
 
-	async patch (id, data, params) { }
+	// async patch (id, data, params) { }
 
 	async remove (id, params) {
 		return super.remove(id, params);

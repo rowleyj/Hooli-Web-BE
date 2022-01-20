@@ -7,9 +7,15 @@ exports.Ride = class Ride extends Service {
 		this.app = app;
 	}
 
-	async find (params) { }
+	async find (params) {
+		const { data } = await this._find(params);
+		return data;
+	}
 
-	async get (id, params) { }
+	async get (id, params) {
+		const data = await this._get(id, params);
+		return data;
+	}
 
 	async create (data, params) {
 		const { gps, closePasses, times } = params;
@@ -56,9 +62,14 @@ exports.Ride = class Ride extends Service {
 		return super.create(ride, params);
 	}
 
-	async update (id, data, params) { }
+	async update (id, data, params) {
+		const user = this._update(id, data, params);
+		return user;
+	}
 
-	async patch (id, data, params) { }
+	// async patch (id, data, params) { }
 
-	async remove (id, params) { }
+	async remove (id, params) {
+		return super.remove(id, params);
+	}
 };

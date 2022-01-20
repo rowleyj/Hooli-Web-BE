@@ -56,7 +56,7 @@ describe('\'ride\' service', () => {
 		expect(service).to.exist;
 	});
 
-	it.only('should create a ride - POST', async() => {
+	it('should create a ride - POST', async() => {
 		const createParams = {
 			...params,
 			...fileToParams(inputRideFile)
@@ -75,7 +75,24 @@ describe('\'ride\' service', () => {
 		expect(stats.movementTimeMs).to.be.greaterThan(0);
 	});
 
-	// it('should retrieve a ride - GET', async() => {
-	// 	const rideRetreived
-	// })
+	it('should retrieve a ride - GET', async() => {
+		const rideRetreived = await app.service('ride').get(ride._id);
+
+		expect(rideRetreived).to.eql(ride);
+	});
+
+	it('should find a ride - GET w/query', async() => {
+		const [rideRetrieved] = await app.service('ride').find({
+			query: {
+				title: ride.title
+			}
+		});
+		expect(rideRetrieved.title).to.equal(ride.title);
+	});
+
+	it('should update a ride - PUT', async() => {
+		const update = { title: chance.sentence(), ...ride };
+		const rideUpdated = await app.service('ride').update(ride._id, update);
+		expect(rideUpdated.title).to.equal(update.title);
+	});
 });
