@@ -27,7 +27,6 @@ exports.Ride = class Ride extends Service {
 		);
 
 		// create closePasses
-		// console.log(closePasses);
 		const closePassCreationPromises = closePasses.map(async(closePass) => this.app.service('closePass').create(
 			{
 				passingDistances: closePass.passingDistances,
