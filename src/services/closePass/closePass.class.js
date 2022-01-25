@@ -33,8 +33,8 @@ exports.ClosePass = class ClosePass extends Service {
 	}
 
 	async update (id, data, params) {
-		const user = this._update(id, data, params);
-		return user;
+		const closePass = this._update(id, data, params);
+		return closePass;
 	}
 
 	// async patch (id, data, params) { }

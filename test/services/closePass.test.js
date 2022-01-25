@@ -54,7 +54,7 @@ describe('ClosePass Service', () => {
 		expect(closePassRetrieved).to.eql(closePass);
 	});
 
-	it('should find a ride - GET w/query', async() => {
+	it('should find a closePass - GET w/query', async() => {
 		const [closePassRetrieved] = await app.service('closePass').find({
 			query: {
 				timeOfPass: closePass.timeOfPass,
@@ -65,7 +65,7 @@ describe('ClosePass Service', () => {
 		expect(closePassRetrieved).to.eql(closePass);
 	});
 
-	it('should update a ride - PUT', async() => {
+	it('should update a closePass - PUT', async() => {
 		const update = { timeOfPass: 17.5, ...closePass };
 		const closePassUpdated = await app.service('closePass').update(closePass._id, update);
 		expect(closePassUpdated.timeOfPass).to.equal(update.timeOfPass);
