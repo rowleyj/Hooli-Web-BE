@@ -2,10 +2,15 @@ const { Service } = require('feathers-mongoose');
 
 exports.Video = class Video extends Service {
 	async find (params) {
-		return this._find(params);
+		// return this._find(params);
+		const { data } = await this._find(params);
+		return data;
 	}
 
-	async get (id, params) { }
+	async get (id, params) {
+		const data = await this._get(id, params);
+		return data;
+	}
 
 	/**
 	 *
@@ -14,7 +19,6 @@ exports.Video = class Video extends Service {
 	 * @returns {Object} newly created route
 	 */
 	async create (data, params) {
-		console.log(data);
 		// rename file
 		// const fileName = Data.now() + params.users._id;
 		const { file } = params;
@@ -28,13 +32,15 @@ exports.Video = class Video extends Service {
 		return super.create(video, params);
 	}
 
-	async update (id, data, params) { }
-
-	async patch (id, data, params) {
+	async update (id, data, params) {
+		const video = this._update(id, data, params);
+		return video;
 	}
 
+	// async patch (id, data, params) {
+	// }
+
 	async remove (id, params) {
-		console.log('at remove');
 		return this._remove(id, params);
 	}
 };

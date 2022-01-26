@@ -18,7 +18,7 @@ module.exports = {
 		get: [],
 		create: [
 			(ctx) => {
-				console.log('there is the context', ctx);
+				// console.log('there is the context', ctx);
 
 				// generate token or get it
 
