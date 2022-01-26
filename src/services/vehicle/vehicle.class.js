@@ -1,15 +1,26 @@
 const { Service } = require('feathers-mongoose');
 
 exports.Vehicle = class Vehicle extends Service {
-	async find(params) {}
+	async find(params) {
+		const { data } = await this._find(params);
+		return data;
+	}
 
-	async get(id, params) {}
+	async get(id, params) {
+		const data = await this._get(id, params);
+		return data;
+	}
 
-	async create(data, params) {}
+	async create(data, params) {
+		return super.create(data, params);
+	}
 
-	async update(id, data, params) {}
+	async update(id, data, params) {
+		const vehicle = this._update(id, data, params);
+		return vehicle;
+	}
 
-	async patch(id, data, params) {}
-
-	async remove(id, params) {}
+	async remove(id, params) {
+		return super.remove(id, params);
+	}
 };

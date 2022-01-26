@@ -71,7 +71,6 @@ describe('Video Service', () => {
 
 	it('should remove a video - DELETE', async() => {
 		const videoRemoved = await app.service('video').remove(video._id);
-		// expect(videoRemoved._id).to.equal(video._id);
 		expect(videoRemoved).to.eql(video);
 	});
 });

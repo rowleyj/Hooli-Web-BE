@@ -12,5 +12,5 @@ module.exports = function (app) {
 	app.configure(route);
 	app.configure(users);
 	app.configure(video);
-	//   app.configure(vehicle);
+	app.configure(vehicle);
 };
