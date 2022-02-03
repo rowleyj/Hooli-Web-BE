@@ -1,5 +1,6 @@
 const { Service } = require('feathers-mongoose');
 const { RideStats } = require('../../lib/RideStats');
+const { RideFile } = require('../../lib/RideFile');
 
 exports.Ride = class Ride extends Service {
 	constructor(options, app) {
@@ -18,7 +19,14 @@ exports.Ride = class Ride extends Service {
 	}
 
 	async create (data, params) {
-		const { gps, closePasses, times } = params;
+		const rideFile = new RideFile(data.ride);
+
+		const closePasses = rideFile.computeClosePasses();
+		const { gps } = rideFile.data;
+		const times = {
+			start: rideFile.data.start,
+			end: rideFile.data.end
+		};
 
 		// create route
 		const route = await this.app.service('route').create(

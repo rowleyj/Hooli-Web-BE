@@ -11,7 +11,8 @@ class RideFile {
 	 * @param {File} file
 	 */
 	constructor(file) {
-		this.data = JSON.parse(file);
+		console.log(file);
+		this.data = { ...file };// JSON.parse(file);
 	}
 
 	get distanceSensorDelay() {
