@@ -58,6 +58,7 @@ exports.Ride = class Ride extends Service {
 		const ride = {
 			routeId: route._id,
 			title: data.title,
+			description: data.description,
 			videoUrl: data.videoUrl,
 			userId: params.users._id,
 			stats: {
