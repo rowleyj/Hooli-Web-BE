@@ -29,7 +29,7 @@
 		"dev": "nodemon src/",
 		"start": "node src/",
 		"mocha": "mocha test/ --recursive --exit",
-		"test-file": "mocha --recursive --exit"
+		"test_file": "mocha --recursive --exit"
 	},
 	"standard": {
 		"env": [
@@ -51,6 +51,7 @@
 		"compression": "^1.7.4",
 		"cors": "^2.8.5",
 		"feathers-mongoose": "^8.3.1",
+		"haversine-distance": "^1.2.1",
 		"helmet": "^4.3.1",
 		"mongodb-core": "^3.2.7",
 		"mongoose": "^6.0.10",

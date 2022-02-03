@@ -1,3 +1,5 @@
+const haversine = require('haversine-distance');
+
 const earthRadius = 6378.8; // in kms
 
 /**
@@ -10,8 +12,9 @@ function deg2Rad (deg) {
 }
 
 function getDistanceBetweenPoints (lat1, lon1, lat2, lon2) {
-	const innerVal = (Math.sin(lat1) * Math.sin(lat2)) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
-	return earthRadius * Math.acos(innerVal);
+	const ptA = { latitude: lat1, longitude: lon1 };
+	const ptB = { latitude: lat2, longitude: lon2 };
+	return haversine(ptA, ptB);
 }
 
 /**
@@ -43,7 +46,7 @@ function gpsCoordsToDistance (coordArray) {
 	for (let i = 0; i < coordArray.length - 1; i++) {
 		const [lat1, lon1] = coordArray[i];
 		const [lat2, lon2] = coordArray[i + 1];
-		distance += getDistanceBetweenPoints(deg2Rad(lat1), deg2Rad(lon1), deg2Rad(lat2), deg2Rad(lon2));
+		distance += getDistanceBetweenPoints(lat1, lon1, lat2, lon2);
 	}
 
 	return distance;

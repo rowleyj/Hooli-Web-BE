@@ -31,7 +31,7 @@ class RideStats {
 	 */
 	getCaloriesBurned(distance) {
 		const weightFactor = 21 / 54; // calories per km / weight in kg
-		return weightFactor * this.weight * distance;
+		return weightFactor * this.weight * (distance / 1000);
 	}
 
 	/**

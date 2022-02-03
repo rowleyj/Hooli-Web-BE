@@ -1,18 +1,17 @@
 const { expect } = require("chai");
-const fs = require('fs');
 const { RideFile } = require('../../../src/lib/RideFile');
 
-const inputFile = fs.readFileSync('./test/fixtures/exampleRideFile.json');
+const inputJSON = require('../../fixtures/exampleRideFile1.json');
 
 describe('RideFile class', () => {
 	it('should create a RideFile instance', () => {
-		const rideFile = new RideFile(inputFile);
+		const rideFile = new RideFile(inputJSON);
 
 		expect(rideFile).to.be.instanceOf(RideFile);
 	});
 
 	it('should correctly parse the input file', () => {
-		const rideFile = new RideFile(inputFile);
+		const rideFile = new RideFile(inputJSON);
 
 		const { data } = rideFile;
 		expect(data).to.exist;
@@ -22,7 +21,7 @@ describe('RideFile class', () => {
 	});
 
 	describe('Getters', () => {
-		const rideFile = new RideFile(inputFile);
+		const rideFile = new RideFile(inputJSON);
 
 		it('should return distance sensor delay', () => {
 			expect(rideFile.distanceSensorDelay).to.equal(100);
@@ -33,8 +32,8 @@ describe('RideFile class', () => {
 		});
 	});
 
-	describe.only('Methods', () => {
-		const rideFile = new RideFile(inputFile);
+	describe('Methods', () => {
+		const rideFile = new RideFile(inputJSON);
 
 		it('should compute close passes', () => {
 			const closePasses = rideFile.computeClosePasses();

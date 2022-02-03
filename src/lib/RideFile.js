@@ -11,7 +11,6 @@ class RideFile {
 	 * @param {File} file
 	 */
 	constructor(file) {
-		console.log(file);
 		this.data = { ...file };// JSON.parse(file);
 	}
 
