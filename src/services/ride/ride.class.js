@@ -50,6 +50,7 @@ exports.Ride = class Ride extends Service {
 		const ride = {
 			routeId: route._id,
 			title: data.title,
+			videoUrl: data.videoUrl,
 			userId: params.users._id,
 			stats: {
 				...stats.summary
@@ -65,8 +66,6 @@ exports.Ride = class Ride extends Service {
 		const user = this._update(id, data, params);
 		return user;
 	}
-
-	// async patch (id, data, params) { }
 
 	async remove (id, params) {
 		return super.remove(id, params);
