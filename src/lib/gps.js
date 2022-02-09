@@ -1,7 +1,5 @@
 const haversine = require('haversine-distance');
 
-const earthRadius = 6378.8; // in kms
-
 /**
  * Converts degress to radians
  * @param {Number} deg

@@ -39,6 +39,9 @@ module.exports = function (app) {
 			// totalClossPasses: Number, found via query
 			elapsedTimeMs: Number,
 			movementTimeMs: Number
+		},
+		meta: {
+			gpsDelay: Number
 		}
 	}, {
 		timestamps: true

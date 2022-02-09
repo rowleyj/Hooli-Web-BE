@@ -66,7 +66,10 @@ exports.Ride = class Ride extends Service {
 			},
 			closePasses: closePassIds,
 			startTime: times.start,
-			endTime: times.end
+			endTime: times.end,
+			meta: {
+				gpsDelay: gps.delay
+			}
 		};
 		return super.create(ride, params);
 	}

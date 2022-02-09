@@ -1,33 +1,33 @@
 {
-  "host": "localhost",
-  "port": 8080,
-  "public": "../public/",
-  "paginate": {
-    "default": 10,
-    "max": 50
-  },
-  "authentication": {
-    "entity": "users",
-    "service": "users",
-    "secret": "cqCAVjUgtPNVPvzAuQygqEVFIps=",
-    "authStrategies": [
-      "jwt",
-      "local"
-    ],
-    "jwtOptions": {
-      "header": {
-        "typ": "access"
-      },
-      "audience": "https://yourdomain.com",
-      "issuer": "feathers",
-      "algorithm": "HS256",
-      "expiresIn": "1d"
-    },
-    "local": {
-      "usernameField": "email",
-      "passwordField": "password",
-	  "errorMessage": "Invalid Login"
-    }
-  },
-  "mongodb": "mongodb+srv://hooli:rowleyhibbs@hooli.bhcss.mongodb.net/hoolidev?retryWrites=true&w=majority"
+	"host": "localhost",
+	"port": 8080,
+	"public": "../public/",
+	"paginate": {
+		"default": 500,
+		"max": 750
+	},
+	"authentication": {
+		"entity": "users",
+		"service": "users",
+		"secret": "cqCAVjUgtPNVPvzAuQygqEVFIps=",
+		"authStrategies": [
+			"jwt",
+			"local"
+		],
+		"jwtOptions": {
+			"header": {
+				"typ": "access"
+			},
+			"audience": "https://yourdomain.com",
+			"issuer": "feathers",
+			"algorithm": "HS256",
+			"expiresIn": "1d"
+		},
+		"local": {
+			"usernameField": "email",
+			"passwordField": "password",
+			"errorMessage": "Invalid Login"
+		}
+	},
+	"mongodb": "mongodb+srv://hooli:rowleyhibbs@hooli.bhcss.mongodb.net/hoolidev?retryWrites=true&w=majority"
 }
