@@ -15,10 +15,10 @@ module.exports = function (app) {
 	const schema = new mongooseClient.Schema({
 		closePassId: {
 			type: ObjectId,
-			required: true
 		},
 		vehicleId: {
 			type: ObjectId,
+			required: true
 		},
 		videoUrl: {
 			type: String
