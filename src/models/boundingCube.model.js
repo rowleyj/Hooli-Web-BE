@@ -29,7 +29,10 @@ module.exports = function (app) {
 		end: {
 			type: Number
 		},
-		boxes: [BoundingBox]
+		boxes: [BoundingBox],
+		speed: {
+			type: Number
+		}
 	}, {
 		timestamps: true
 	});
