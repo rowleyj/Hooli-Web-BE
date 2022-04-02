@@ -1,4 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const axios = require('axios');
 
 module.exports = {
 	before: {
@@ -15,7 +16,18 @@ module.exports = {
 		all: [],
 		find: [],
 		get: [],
-		create: [],
+		create: [
+			(ctx) => {
+				console.log('info: sending to ml pipeline', ctx.params.authentication.accessToken);
+				// tell ML server to process insights
+				axios.get('http://localhost:5000/process_video', {
+					params: {
+						token: ctx.params.authentication.accessToken
+					}
+				});
+			}
+
+		],
 		update: [],
 		patch: [],
 		remove: []

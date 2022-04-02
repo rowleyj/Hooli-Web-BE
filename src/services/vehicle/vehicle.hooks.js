@@ -5,7 +5,7 @@ module.exports = {
 		all: [],
 		find: [authenticate('jwt')],
 		get: [authenticate('jwt')],
-		create: [authenticate('jwt')],
+		create: [authenticate('jwt'), () => console.log('creating vehicle')],
 		update: [authenticate('jwt')],
 		patch: [authenticate('jwt')],
 		remove: [authenticate('jwt')]
