@@ -15,7 +15,7 @@ const testUser = {
 	email: chance.email(),
 	password: chance.string()
 };
-const inputRideFile = fs.readFileSync('./test/fixtures/exampleRideFile.json');
+const inputRideFile = require('../fixtures/exampleRideFile1.json');
 
 /**
  * Parses a ride file and returns in formatted params mocking middleware
@@ -59,10 +59,8 @@ describe('\'ride\' service', () => {
 	it('should create a ride - POST', async() => {
 		const createParams = {
 			...params,
-			...fileToParams(inputRideFile)
 		};
-		// console.log(createParams);
-		ride = await app.service('ride').create(testRide, createParams);
+		ride = await app.service('ride').create({ ...testRide, ride: { ...inputRideFile } }, createParams);
 
 		expect(ride.title).to.equal(testRide.title);
 		expect(ride.routeId).to.exist;
