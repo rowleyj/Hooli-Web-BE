@@ -37,8 +37,6 @@ exports.ClosePass = class ClosePass extends Service {
 		return closePass;
 	}
 
-	// async patch (id, data, params) { }
-
 	async remove (id, params) {
 		return super.remove(id, params);
 	}

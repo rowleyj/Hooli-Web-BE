@@ -28,7 +28,7 @@ describe('RideFile class', () => {
 		});
 
 		it('should return gps sensor delay', () => {
-			expect(rideFile.gpsSensorDelay).to.equal(150);
+			expect(rideFile.gpsSensorDelay).to.equal(100);
 		});
 	});
 
