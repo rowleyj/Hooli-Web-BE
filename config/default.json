@@ -29,5 +29,5 @@
 			"errorMessage": "Invalid Login"
 		}
 	},
-	"mongodb": "mongodb+srv://hooli:rowleyhibbs@hooli.bhcss.mongodb.net/hoolidev?retryWrites=true&w=majority"
+	"mongodb": "mongodb+srv://'username':'password'@hooli.bhcss.mongodb.net/hoolidev?retryWrites=true&w=majority"
 }
